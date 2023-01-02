@@ -1,0 +1,19 @@
+version: '3'
+services:
+  db:
+    image: postgres:latest
+    environment:
+      - POSTGRES_USER=martin
+      - POSTGRES_PASSWORD=martin
+      - POSTGRES_DB=scrapped_reality
+    ports:
+      - "5432:5432"
+  web:
+    build: .
+    command: gunicorn app:app --bind=0.0.0.0:5000 --reload --log-level=debug --workers 1
+    ports:
+      - "5000:5000"
+    environment:
+      - DATABASE_URL=postgresql://martin:martin@db:5432/scrapped_reality
+    depends_on:
+      - db

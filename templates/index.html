@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Reality scrapper</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="google" content="notranslate">
+    <meta http-equiv="Content-Language" content="en">
+    <link type="text/css" rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
+
+
+    {% assets output="gen/style.css", "css/style.css" %}
+        <link type="text/css" rel="stylesheet" href="{{ ASSET_URL }}">
+    {% endassets %}
+</head>
+<body>
+
+<section class="content_section">
+    {% for message in get_flashed_messages() %}
+        <div class="flash">{{ message }}</div>
+    {% endfor %}
+    <div class="content container-fluid">
+        <div class="row">
+            <div class="col-10">
+                <div class="card-deck limited_cards" id="folder_card_deck"> 
+                    {% for flat in flats %}
+                        {% include "flat_card.html" %}
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+</body>
+</html>
+
