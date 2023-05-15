@@ -8,6 +8,15 @@
     <meta http-equiv="Content-Language" content="en">
     <link type="text/css" rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
 
+    <script src="{{ url_for('static', filename='js/libraries/jquery-3.4.1.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/libraries/bootstrap.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/libraries/bootbox.min.js') }}"></script>
+
+    {% assets filters="jsmin", output="gen/index.js",
+        "js/api_request.js",
+        "js/index.js" %}
+        <script type="module" src="{{ ASSET_URL }}"></script>
+    {% endassets %}
 
     {% assets output="gen/style.css", "css/style.css" %}
         <link type="text/css" rel="stylesheet" href="{{ ASSET_URL }}">
@@ -16,14 +25,27 @@
 <body>
 
 <section class="content_section">
+
+    {% include "dialogs/create.html" %}
+
     {% for message in get_flashed_messages() %}
         <div class="flash">{{ message }}</div>
     {% endfor %}
     <div class="content container-fluid">
         <div class="row">
+            <div class="col">
+                <button class="btn btn-primary" type="button" id="update_button">Update </button>
+                <button class="btn btn-success" type="button" id="create_button">Create </button>
+                <button class="btn btn-danger" type="button" id="delete_button">Delete </button>
+            </div>
+        </div>
+        <div class="row">
             <div class="col-10">
-                <div class="card-deck limited_cards" id="folder_card_deck"> 
-                    {% for flat in flats %}
+                <input type="hidden" id="apartment_numbers" value="{{ apartment_numbers | jsonify }}">
+                <input type="hidden" id="clean_apartment_numbers" value="{{ clean_apartment_numbers | jsonify }}">
+
+                <div class="card-deck limited_cards" id="folder_card_deck">
+                    {% for clean_apartment_number, flat in zip(clean_apartment_numbers, flats) %}
                         {% include "flat_card.html" %}
                     {% endfor %}
                 </div>

@@ -1,10 +1,24 @@
 
 
 <div class="card shadow bg-info mb-3">
-    <img src="{{ flat['image_url'] }}" class="card-img-top" loading="lazy">
-    <div class="card-header"></div>
+    <img src="{{ flat['img_src'] }}" class="card-img-top" loading="lazy">
+    <div class="card-header">
+        <div class="custom-control custom-checkbox checkbox-xl" style="z-index: 2;">
+            <input class="custom-control-input" type="checkbox" value="" id="flat_{{ clean_apartment_number }}_checkbox">
+            <label class="custom-control-label" for="flat_{{ clean_apartment_number }}_checkbox" style="display: inline-block;">{{ flat['apartment_number'] }}</label>
+        </div>
+    </div>
     <div class="card-body">
-        <h5 class="card-title"> {{ flat['title'] }}</h5>
-        <a href="{{ flat['url'] }}" class="stretched-link"></a>
+        <ul class="list-unstyled">
+            <li><strong>Projekt:</strong> {{ flat['title'] }}</li>
+            <li><strong>Rooms:</strong> {{ flat['rooms'] }}</li>
+            <li><strong>Size:</strong> {{ flat['size'] }}</li>
+            <li><strong>Total area size:</strong> {{ flat['total_area_size'] }}</li>
+            <li><strong>Sales price:</strong> {{ flat['sales_price'] }}</li>
+            <li><strong>Floor number:</strong> {{ flat['floor_number'] }}</li>
+            <li><strong>Project name:</strong> {{ flat['project_name'] }}</li>
+            <li><strong>Status:</strong> {{ flat['status'] }}</li>
+        </ul>
+        <a href="{{ flat['href'] }}" class="stretched-link"></a>
     </div>
 </div>

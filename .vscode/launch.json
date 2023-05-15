@@ -1,0 +1,29 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Scrappe reality",
+            "type": "python",
+            "request": "launch",
+            "justMyCode": false,
+            //use correct path if you want to debug it
+            "program": "/home/martin/.conda/envs/detectron2/bin/gunicorn",
+            "console": "integratedTerminal",
+            "cwd": "${workspaceFolder}",
+            "gevent": true,
+            "args": [
+                "app:app",
+                "--bind=0.0.0.0:5000",
+                "--reload",
+                "--log-level=debug",
+                "-w",
+                "1",
+                "--timeout", "90"
+            ],
+            "envFile": "${workspaceFolder}/.env",
+        },
+    ]
+}
